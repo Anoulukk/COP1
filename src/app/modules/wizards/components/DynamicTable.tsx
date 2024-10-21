@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { KTIcon } from "../../../../_metronic/helpers";
-const DynamicTable = () => {
+
+interface DynamicTableProps {
+  data: {
+    classified: string;
+    code: string;
+    description: string;
+    input_type: string;
+    column: string[]; 
+  };
+}
+
+const DynamicTable: FC<{data:any}> = ({ data }) => {
   const [rows, setRows] = useState([
     { id: Date.now(), areaNo: "", areaName: "", areaSize: "", percentage: "", remark: "" },
   ]);
 
   const handleAddRow = () => {
-    // Create a new empty row with unique id
     const newRow = {
-      id: Date.now(), // New unique id
+      id: Date.now(),
       areaNo: "",
       areaName: "",
       areaSize: "",
@@ -18,7 +28,6 @@ const DynamicTable = () => {
     setRows([...rows, newRow]);
   };
   const handleRemoveRow = (id: any) => {
-    // Only remove the row if more than one row is present
     if (rows.length > 1) {
       setRows(rows.filter((row) => row.id !== id));
     }
@@ -30,65 +39,33 @@ const DynamicTable = () => {
     );
     setRows(updatedRows);
   };
-
+console.log(data);
   return (
     <div>
       <table className="table table-row-bordered table-row-gray-500">
         <thead>
           <tr>
-            <th>ລຳດັບ</th>
-            <th>ຊື່ພື້ນທີ່</th>
-            <th>ເນື້ອທີ່ (ຕາແມັດ)</th>
-            <th>ສ່ວນຮ້ອຍ</th>
-            <th>ໝາຍເຫດ</th>
+            {data.map((colHeader:any, index:any) => (
+              <th key={index}>{colHeader}</th>
+            ))}
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => (
+          {rows.map((row) => (
             <tr key={row.id}>
-              <td>
-                <input
-                  type="text"
-                  value={row.areaNo}
-                  onChange={(e) => handleInputChange(row.id, "areaNo", e.target.value)}
-                  className="form-control"
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  value={row.areaName}
-                  onChange={(e) => handleInputChange(row.id, "areaName", e.target.value)}
-                  className="form-control"
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  value={row.areaSize}
-                  onChange={(e) => handleInputChange(row.id, "areaSize", e.target.value)}
-                  className="form-control"
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  value={row.percentage}
-                  onChange={(e) => handleInputChange(row.id, "percentage", e.target.value)}
-                  className="form-control"
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  value={row.remark}
-                  onChange={(e) => handleInputChange(row.id, "remark", e.target.value)}
-                  className="form-control"
-                />
-              </td>
+              {data.map((colHeader:any, colIndex:any) => (
+                <td key={colIndex}>
+                  <input
+                    type="text"
+                    value={row[colHeader as keyof typeof row] || ""}
+                    onChange={(e) => handleInputChange(row.id, colHeader, e.target.value)}
+                    className="form-control"
+                  />
+                </td>
+              ))}
               <td>
                 <div className="d-flex">
-                  {/* Hide remove button if there's only one row */}
                   {rows.length > 1 && (
                     <a
                       href="#"

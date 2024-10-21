@@ -1,0 +1,169 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "id": 1,
+            "status": "Draft",
+            "date": "2024-01-01"
+        },
+        {
+            "id": 1,
+            "status": "Draft",
+            "date": "2024-01-01"
+        },
+        {
+            "id": 2,
+            "status": "Requested",
+            "date": "2024-02-01"
+        },
+        {
+            "id": 3,
+            "status": "Ready",
+            "date": "2024-03-01"
+        },
+        {
+            "id": 4,
+            "status": "Processing",
+            "date": "2024-06-01"
+        },
+        {
+            "id": 5,
+            "status": "Certified",
+            "date": "2024-06-01"
+        },
+        {
+            "id": 6,
+            "status": "Completed",
+            "date": "2024-06-01"
+        },
+        {
+            "id": 7,
+            "status": "Rejected",
+            "date": "2024-07-01"
+        },
+        {
+            "id": 8,
+            "status": "Expired",
+            "date": "2024-08-01"
+        },
+        {
+            "id": 9,
+            "status": "Expired",
+            "date": "2024-08-01"
+        },
+        {
+            "id": 10,
+            "status": "Completed",
+            "date": "2024-08-01"
+        },
+        {
+            "id": 11,
+            "status": "Completed",
+            "date": "2024-09-01"
+        }
+    ],
+    "data2": [
+        {
+            "id": 1,
+            "label": "Hazardous",
+            "value": 32
+        },
+        {
+            "id": 2,
+            "label": "Non-Hazardous",
+            "value": 17
+        }
+    ],
+    "data3": [
+        {
+            "name": "Hazardous",
+            "data": [
+                {"x":"2024-01-01", "y":10000, "date":"2024-01-01"},
+                {"x":"2024-02-02", "y":15000, "date":"2024-02-02"},
+                {"x":"2024-03-03", "y":13000, "date":"2024-03-03"},
+                {"x":"2024-04-04", "y":18000, "date":"2024-04-04"},
+                {"x":"2024-05-05", "y":20000, "date":"2024-05-05"}
+            ]       
+        },
+        {
+            "name": "Non-Hazardous",
+            "data": [
+                {"x":"2024-01-01", "y":20000, "date":"2024-01-01"},
+                {"x":"2024-02-02", "y":25000, "date":"2024-02-02"},
+                {"x":"2024-03-03", "y":23000, "date":"2024-03-03"},
+                {"x":"2024-04-04", "y":28000, "date":"2024-04-04"},
+                {"x":"2024-05-05", "y":30000, "date":"2024-05-05"}
+            ]       
+        }
+    ],
+    "data4" : [
+        {"x": "Generator", "y": 400},
+        {"x": "Transporter", "y": 430},
+        {"x": "Disposal", "y": 448}
+    ],
+    "data5":[
+        { "label": "12 01 05", "value": 138864.62 },
+        { "label": "15 02 02", "value": 85344.8 },
+        { "label": "02 03 04", "value": 61763 },
+        { "label": "15 01 01", "value": 56580.66 },
+        { "label": "12 01 05", "value": 34364.62 }
+    ],
+    "data6":[
+        { "label": "Draft", "value": 2 },
+        { "label": "Active", "value": 70 },
+        { "label": "Suspended", "value": 0 },
+        { "label": "Expired", "value": 0 },
+        { "label": "Rejected", "value": 1 }
+    ],
+    "data7":[
+        { "role": "Waste Generator" },
+        { "role": "Waste Transporter" },
+        { "role": "Waste Disposal" },
+        { "role": "Waste Regulator" },
+        { "role": "Waste Generator" },
+        { "role": "Waste Transporter" },
+        { "role": "Waste Disposal" },
+        { "role": "Waste Regulator" },
+        { "role": "Waste Generator" },
+        { "role": "Waste Transporter" },
+        { "role": "Waste Disposal" },
+        { "role": "Waste Regulator" },
+        { "role": "Waste Generator" },
+        { "role": "Waste Transporter" },
+        { "role": "Waste Disposal" },
+        { "role": "Waste Regulator" }
+    ],
+    "data8":[
+        { "manifestNo": "DH24JDN", "type":"Hz", "status":"Draft", "level":"ນອກເຂດເສດຖະກິດພິເສດ", "organization":"Be Cooperate Export Sole Co., Ltd" },
+        { "manifestNo": "DH24VJ4", "type":"NHz", "status":"Active", "level":"ໃນເຂດເສດຖະກິດພິເສດ", "organization":"Cvilux lao co.,Ltd" },
+        { "manifestNo": "DH24JDN", "type":"Hz", "status":"Rejected", "level":"ນອກເຂດເສດຖະກິດພິເສດ", "organization":"Be Cooperate Export Sole Co., Ltd" },
+        { "manifestNo": "DH24VJ4", "type":"NHz", "status":"Suspended", "level":"ໃນເຂດເສດຖະກິດພິເສດ", "organization":"Hilux lao co.,Ltd" },
+        { "manifestNo": "DH24VJ4", "type":"Hz", "status":"Expired", "level":"ໃນເຂດເສດຖະກິດພິເສດ", "organization":"Vigo lao co.,Ltd" }
+    ],
+ 
+    "data9":[
+        { "EMCGID": "EMCG240210070", "type":"Hz", "status":"Draft", "quota":"20000 kg/year", "organization":"Be Cooperate Export Sole Co., Ltd" },
+        { "EMCGID": "EMCG240210070", "type":"NHz", "status":"Active", "quota":"30000 kg/year", "organization":"Cvilux lao co.,Ltd" },
+        { "EMCGID": "EMCG240210070", "type":"Hz", "status":"Rejected", "quota":"40000 kg/year", "organization":"Be Cooperate Export Sole Co., Ltd" },
+        { "EMCGID": "EMCG240210070", "type":"NHz", "status":"Suspended", "quota":"50000 kg/year", "organization":"Hilux lao co.,Ltd" },
+        { "EMCGID": "EMCG240210070", "type":"NHz", "status":"Suspended", "quota":"50000 kg/year", "organization":"Hilux lao co.,Ltd" },
+        { "EMCGID": "EMCG240210070", "type":"NHz", "status":"Suspended", "quota":"50000 kg/year", "organization":"Hilux lao co.,Ltd" },
+        { "EMCGID": "EMCG240210070", "type":"NHz", "status":"Suspended", "quota":"50000 kg/year", "organization":"Hilux lao co.,Ltd" },
+        { "EMCGID": "EMCG240210070", "type":"NHz", "status":"Suspended", "quota":"50000 kg/year", "organization":"Hilux lao co.,Ltd" },
+        { "EMCGID": "EMCG240210070", "type":"NHz", "status":"Suspended", "quota":"50000 kg/year", "organization":"Hilux lao co.,Ltd" },
+        { "EMCGID": "EMCG240210070", "type":"Hz", "status":"Expired", "quota":"60000 kg/year", "organization":"Vigo lao co.,Ltd" }
+    ],
+    "data10":[{
+        "data":[
+            { "x": "02 03 04", "y": 138864.62, "date":"2024-01-01" },
+            { "x": "15 02 02", "y": 85344.8, "date":"2024-02-02" },
+            { "x": "02 03 04", "y": 61763, "date":"2024-03-03" },
+            { "x": "15 01 01", "y": 56580.66, "date":"2024-04-04" },
+            { "x": "12 01 05", "y": 34364.62, "date":"2024-05-05" }
+        ]
+    }
+
+    ],
+ 
+    "message": "Successfully! All records has been fetched."
+}

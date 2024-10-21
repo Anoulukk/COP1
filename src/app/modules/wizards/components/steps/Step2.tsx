@@ -44,12 +44,12 @@ const Step2: FC = () => {
       { classified: "title", code: "231", description: "ເນື້ອທີ່ ແລະ ການນຳໃຊ້ພື້ນທີ່", input_type: null },
       { classified: "sub_head", code: "231A", description: "ເນື້ອທີ່ທັງໝົດ (ຕາແມັດ)", input_type: "number" },
       { classified: "sub_head", code: "231B", description: "ພື້ນທີ່ສີຂຽວ (ສ່ວນຮ້ອຍ)", input_type: "number" },
-      { classified: "sub_head", code: "231C", description: "ການນຳໃຊ້ພື້ນທີ່", input_type: "T2-1" },
+      { classified: "sub_head", code: "231C", description: "ການນຳໃຊ້ພື້ນທີ່", input_type: "T2-1", column:["ລຳດັບ", "ຊື່ພື້ນທີ່", "ເນື້ອທີ່ (ຕາແມັດ)", "ສ່ວນຮ້ອຍ", "ໝາຍເຫດ"] },
       { classified: "sub_head", code: "231D", description: "ແຜນຜັງການນຳໃຊ້ພື້ນທີ່", input_type: "file" },
     
       { classified: "title", code: "232", description: "ອາຄານ ແລະ ສິ່ງປຸກສ້າງ", input_type: null },
       { classified: "sub_head", code: "232A", description: "ຈຳນວນອາຄານ ແລະ ສິ່ງປຸກສ້າງ", input_type: "text" },
-      { classified: "sub_head", code: "232B", description: "ຂໍ້ມູນອາຄານ ແລະ ສິ່ງແວດລ້ອມ", input_type: "T2-2" },
+      { classified: "sub_head", code: "232B", description: "ຂໍ້ມູນອາຄານ ແລະ ສິ່ງແວດລ້ອມ", input_type: "T2-2", column:["ລຳດັບ", "ຊື່ອາຄານ", "ລັກສະນະອາຄານ", "ຂະໜາດອາຄານ", "ການນຳໃຊ້/ການນຳໃຊ້ສະເພາະ"] },
       { classified: "sub_head", code: "232C", description: "ໃບອະນຸຍາດປຸກສ້າງໂຮງງານ ເລກທີ", input_type: "text" },
     
       { classified: "title", code: "232D", description: "ແຜນຜັງການກໍ່ສ້າງ ແລະ ລະບົບເຕັກນິກໂຮງງານ", input_type: null },
@@ -72,7 +72,7 @@ const Step2: FC = () => {
     ]
   };
 
-  const renderInput = (inputType: string, description: string, classified: string) => {
+  const renderInput = (inputType: string, description: string, classified: string, column:any) => {
     const isTInput = inputType?.startsWith('T');
     switch (inputType) {
       case 'text':
@@ -90,9 +90,8 @@ const Step2: FC = () => {
           <Select className='react-select-styled ms-4' classNamePrefix='react-select' />
         );
         default:
-          // Handle the case where inputType starts with 'T'
           if (isTInput) {
-            return <DynamicTable />;
+            return <DynamicTable data={column}/>;
           }
           return null;
     }
@@ -108,7 +107,7 @@ const Step2: FC = () => {
           {item.classified === "title"
             ? <h4 className='ms-3'>{item.code} {item.description}</h4>
             : <span className='fs-5 ms-4'>{item.code} {item.description}</span>}
-          {renderInput(item.input_type, item.description, item.classified)}
+          {renderInput(item.input_type, item.description, item.classified, item.column)}
         </div>
       );
     });
@@ -121,26 +120,26 @@ const Step2: FC = () => {
       <h2 className='mb-5'>
         200 ທີ່ຕັ້ງ ແລະ ການນຳໃຊ້ພື້ນທີ່ໂຮງງານ
       </h2>
-      <div className='accordion' id='kt_accordion_1'>
+      <div className='accordion' id='kt_accordion_2'>
         {Object.keys(forms).map((formKey, idx) => (
           <div className='accordion-item' key={idx}>
-            <h2 className='accordion-header' id={`kt_accordion_1_header_${idx + 1}`}>
+            <h2 className='accordion-header' id={`kt_accordion_2_header_${idx + 1}`}>
               <button
                 className='accordion-button fs-4 fw-bold collapsed'
                 type='button'
                 data-bs-toggle='collapse'
-                data-bs-target={`#kt_accordion_1_body_${idx + 1}`}
+                data-bs-target={`#kt_accordion_2_body_${idx + 1}`}
                 aria-expanded='false'
-                aria-controls={`kt_accordion_1_body_${idx + 1}`}
+                aria-controls={`kt_accordion_2_body_${idx + 1}`}
               >
                 {formKey.replace('form', '')} {forms[formKey][0]?.description}
               </button>
             </h2>
             <div
-              id={`kt_accordion_1_body_${idx + 1}`}
+              id={`kt_accordion_2_body_${idx + 1}`}
               className='accordion-collapse collapse'
-              aria-labelledby={`kt_accordion_1_header_${idx + 1}`}
-              data-bs-parent='#kt_accordion_1'
+              aria-labelledby={`kt_accordion_2_header_${idx + 1}`}
+              data-bs-parent='#kt_accordion_2'
             >
               <div className='accordion-body'>
                 {renderFormItems(forms[formKey])}

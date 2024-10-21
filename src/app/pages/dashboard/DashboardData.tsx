@@ -1,5 +1,5 @@
 import axios from "axios";
-const response = await axios.get("https://127.0.0.1:5501/kintone/https/testAPI.json");
+const response = await axios.get("http://localhost:5173/metronic8/react/demo1/testAPI.json");
 
 export const allUsersData = response.data.data7;
 export const manifestApprovalData = response.data.data8;

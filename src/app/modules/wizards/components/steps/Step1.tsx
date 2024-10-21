@@ -50,7 +50,7 @@ const Step1: FC = () => {
       { classified: "title", code: "131", description: "ພະນັກງານຮັບຜິດຊອບດ້ານຄວາມປອດໄພ ແລະ ສຸຂະພາບແຮງງານ", input_type: null },
       { classified: "sub_head", code: "131A", description: "ຊື່ ພະນັກງານຮັບຜິດຊອບດ້ານຄວາມປອດໄພ ແລະ ສຸຂະພາບແຮງງານ", input_type: "text" },
       { classified: "title", code: "132", description: "ໜ່ວຍງານຮັບຜິດຊອບ ຫຼື ຄະນະກຳມະການດ້ານຄວາມປອດໄພ ແລະ ສຸຂະພາບແຮງງານ", input_type: null },
-      { classified: "sub_head", code: "132A", description: "ລາຍຊື່ພາຍໃນຫົວໜ່ວຍຄວາມປອດໄພ", input_type: "T1-1" },
+      { classified: "sub_head", code: "132A", description: "ລາຍຊື່ພາຍໃນຫົວໜ່ວຍຄວາມປອດໄພ", input_type: "T1-1", column:["ຊື່ ແລະ ນາມສະກຸນ", "ພາກສ່ວນ"] },
       { classified: "sub_head", code: "132B", description: "ໂຄງຮ່າງການຈັດຕັ້ງໜ່ວຍງານຮັບຜິດຊອບຄວາມປອດໄພ ແລະ ສຸຂະພາບແຮງງານ", input_type: "file" },
     ],
     form140: [
@@ -69,7 +69,7 @@ const Step1: FC = () => {
     ],
 
   };
-  const renderInput = (inputType: string, description: string, classified: string) => {
+  const renderInput = (inputType: string, description: string, classified: string, column:any) => {
     const isTInput = inputType?.startsWith('T');
     switch (inputType) {
       case 'text':
@@ -86,11 +86,13 @@ const Step1: FC = () => {
         ) : (
           <Select className='react-select-styled ms-4' classNamePrefix='react-select' />
         );
+        case 'T1-1':
+          return <DynamicTable data={column}/>;
+
         default:
-          // Handle the case where inputType starts with 'T'
-          if (isTInput) {
-            return <DynamicTable />;
-          }
+          // if (isTInput) {
+          //   return <DynamicTable column={column}/>;
+          // }
           return null;
     }
   };
@@ -105,7 +107,7 @@ const Step1: FC = () => {
           {item.classified === "title"
             ? <h4 className='ms-3'>{item.code} {item.description}</h4>
             : <span className='fs-5 ms-4'>{item.code} {item.description}</span>}
-          {renderInput(item.input_type, item.description, item.classified)}
+          {renderInput(item.input_type, item.description, item.classified, item.column)}
         </div>
       );
     });
