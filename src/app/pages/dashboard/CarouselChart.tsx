@@ -35,7 +35,7 @@ const CarouselChart: React.FC<CarouselChartProps> = ({
   data,
   options,
   legendLabel_allManifest,
-}) => {
+}) => { 
   const [selectedButton, setSelectedButton] = useState(0);
   const [isPrevDisabled, setIsPrevDisabled] = useState(true);
   const [isNextDisabled, setIsNextDisabled] = useState(false);

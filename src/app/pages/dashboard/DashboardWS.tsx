@@ -233,7 +233,7 @@ const DashboardWS: FC = () => {
                       <th>Status</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody> 
                     {manifestApprovalData.map((item:any, index:number) => (
                       <tr key={index}>
                         <td>{item.organization}</td>

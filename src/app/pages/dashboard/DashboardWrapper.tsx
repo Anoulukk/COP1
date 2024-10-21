@@ -46,7 +46,7 @@ const DashboardPage: FC = () => {
     "12 Month": 12,
   };
   const roleCount = allUsersData.reduce((acc: { [key: string]: any; }, { role }: any) => {
-    acc[role] = (acc[role] || 0) + 1;
+    acc[role] = (acc[role] || 0) + 1; 
     return acc;
   }, {});
   
