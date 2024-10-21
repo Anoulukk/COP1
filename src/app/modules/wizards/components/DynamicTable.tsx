@@ -41,7 +41,6 @@ const DynamicTable = () => {
             <th>ເນື້ອທີ່ (ຕາແມັດ)</th>
             <th>ສ່ວນຮ້ອຍ</th>
             <th>ໝາຍເຫດ</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
