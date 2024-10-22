@@ -10,6 +10,7 @@ import {Form, Formik, FormikValues} from 'formik'
 import {createAccountSchemas, ICreateAccount, inits} from './CreateAccountWizardHelper'
 import { ToolbarWrapper } from '../../../../_metronic/layout/components/toolbar'
 import { Content } from '../../../../_metronic/layout/components/content'
+import { Step1Comment } from './steps/Step1Comment'
 
 const Vertical = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
@@ -234,7 +235,7 @@ const Vertical = () => {
 
                     {/* begin::Label*/}
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>ການຄຸມຄອງຄວາມປອດໄພ ແລະ ສຸຂະພາບແຮງງານ</h3>
+                      <h3 className='stepper-title'>ການຄຸ້ມຄອງຄວາມປອດໄພ ແລະ ສຸຂະພາບແຮງງານ</h3>
                     </div>
                     {/* end::Label*/}
                   </div>
@@ -258,7 +259,7 @@ const Vertical = () => {
 
                     {/* begin::Label*/}
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>ສະຫຼຸບແຜນການຄມຄອງ ແລະ 
+                      <h3 className='stepper-title'>ສະຫຼຸບແຜນການຄຸ້ມຄອງ ແລະ 
                       ຕິດຕາມກວດກາມົນລະພິດສິ່ງແວດລ້ອມ</h3>
                     </div>
                     {/* end::Label*/}
@@ -278,7 +279,8 @@ const Vertical = () => {
               {() => (
                 <Form className='' noValidate id='kt_create_account_form' placeholder={undefined}>
                   <div className='current' data-kt-stepper-element='content'  >
-                    <Step1 />
+                    {/* <Step1 /> */}
+                    <Step1Comment />
                   </div>
 
                   <div data-kt-stepper-element='content'>
@@ -318,15 +320,15 @@ const Vertical = () => {
                         data-kt-stepper-action='previous'
                       >
                         <KTIcon iconName='arrow-left' className='fs-4 me-1' />
-                        Back
+                        ກັບຄືນ
                       </button>
                     </div>
 
                     <div>
                       <button type='submit' className='btn btn-lg btn-primary me-3'>
                         <span className='indicator-label'>
-                          {stepper?.currentStepIndex !== ((stepper?.totalStepsNumber || 2) - 1) && 'Continue'}
-                          {stepper?.currentStepIndex === ((stepper?.totalStepsNumber || 2) - 1) && 'Submit'}
+                          {stepper?.currentStepIndex !== ((stepper?.totalStepsNumber || 2) - 1) && 'ຖັດໄປ'}
+                          {stepper?.currentStepIndex === ((stepper?.totalStepsNumber || 2) - 1) && 'ສົ່ງ'}
                           <KTIcon iconName='arrow-right' className='fs-3 ms-2 me-0' />
                         </span>
                       </button>

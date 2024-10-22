@@ -1,11 +1,35 @@
-import {FC} from 'react'
+import {FC, useState} from 'react'
 import {KTIcon} from '../../../../../_metronic/helpers'
 import {ErrorMessage, Field} from 'formik'
 import DynamicTable from '../DynamicTable';
 import Select from 'react-select';
+import { Button, Modal } from 'react-bootstrap';
 
 
-const Step1: FC = () => {
+const Step1Comment: FC = () => {
+  const [showCommentPopup, setShowCommentPopup] = useState(false);
+  const [currentComment, setCurrentComment] = useState('');
+  const [activeInput, setActiveInput] = useState<string>(""); // Keep track of the active input for comments
+  const [comments, setComments] = useState<{ [key: string]: string }>({}) 
+    // Handle opening the popup and load any existing comment
+    const handleIconClick = (code: string, inputName: string) => {
+      setActiveInput(code)
+      setCurrentComment(comments[code] || '') // Load any existing comment
+      setShowCommentPopup(true)
+    }
+  
+    // Handle closing the popup
+    const handleClosePopup = () => {
+      setShowCommentPopup(false)
+      setCurrentComment('')
+    }
+  
+    // Handle saving the comment and update the comment display
+    const handleSaveComment = () => {
+      setComments({ ...comments, [activeInput]: currentComment }) // Save the comment for the active input
+      handleClosePopup()
+    }
+  
   const forms:any = {
     form110: [
       { classified: "heading", code: "110", description: "ຂໍ້ມູນວິສາຫະກິດ", input_type: null },
@@ -14,7 +38,7 @@ const Step1: FC = () => {
       { classified: "sub_head", code: "110A2", description: "ຊື່ອັງກິດ", input_type: "text" },
       { classified: "title", code: "110B", description: "ຜູ້ອຳນວຍການ", input_type: "text" },
       { classified: "title", code: "110C", description: "ປະກອບກິດຈະການ", input_type: "text" },
-      { classified: "title", code: "110D", description: "ທຶນຈົດທະບຽນ", input_type: "null" },
+      { classified: "title", code: "110D", description: "ທຶນຈົດທະບຽນ", input_type: null },
       { classified: "sub_head", code: "110D1", description: "ກີບ", input_type: "number" },
       { classified: "sub_head", code: "110D2", description: "ໂດລາ", input_type: "number" },
       { classified: "title", code: "110E", description: "ກຳນົດອາຍຸການລົງທຶນ (ປີ)", input_type: "number" },
@@ -69,49 +93,75 @@ const Step1: FC = () => {
     ],
 
   };
-  const renderInput = (inputType: string, description: string, classified: string, column:any) => {
-    const isTInput = inputType?.startsWith('T');
+   const renderInput = (inputType: string, description: string, classified: string, column: any, code: string) => {
+    const isTInput = inputType?.startsWith('T')
     switch (inputType) {
       case 'text':
       case 'number':
       case 'file':
-        return classified === "title" ? (
-          <input type={inputType} className="form-control ms-3" />
-        ) : (
-          <input type={inputType} className="form-control ms-7" />
-        );
+        return (
+          <div className={classified === 'title' ? 'input-icon-container ms-3' : 'input-icon-container ms-7'}>
+            <input type={inputType} placeholder={description} className="form-control" />
+            {/* Display the comment below the input if it exists */}
+            
+          </div>
+        )
       case 'choice':
-        return classified === "title" ? (
-          <Select className='react-select-styled ms-3' classNamePrefix='react-select' />
-        ) : (
-          <Select className='react-select-styled ms-7' classNamePrefix='react-select' />
-        );
-        default:
-          if (isTInput) {
-            return classified === "title" ? (
-              <div className='ms-7'><DynamicTable data={column}/></div>
-            ) : (
-              <div className='ms-7'><DynamicTable data={column}/></div>
-            );
-          }
-          return null;
+        return (
+          <Select className={classified === 'title' ? 'react-select-styled ms-3' : 'react-select-styled ms-7'} classNamePrefix="react-select" />
+        )
+      default:
+        if (isTInput) {
+          return <div className="ms-7"><DynamicTable data={column} /></div>
+        }
+        return null
     }
-  };
-
+  }
   const renderFormItems = (form: any[]) => {
     return form.map((item, index) => {
       if (item.classified === 'heading') {
         return null;
       }
-      return (
-        <div className="form-group mb-3" key={index}>
-          {item.classified === "title"
-            ? <h4 className='ms-3'>{item.code} {item.description}</h4>
-            : <span className='fs-5 ms-7'>{item.code} {item.description}</span>}
-          {renderInput(item.input_type, item.description, item.classified, item.column)}
+      // Check if item.input_type is not null
+  const showIcon = item.input_type !== null;
+
+  return (
+    <div className="form-group mb-3" key={index}>
+      {item.classified === 'title' ? (
+        <div className='d-flex justify-content-between'>
+          <h4 className='ms-3'>{item.code} {item.description}</h4>
+          {/* Show the icon only if input_type is not null */}
+          {showIcon && (
+            <span onClick={() => handleIconClick(item.code, item.description)}>
+              <KTIcon iconName="messages" className='fs-2' />
+            </span>
+          )}
         </div>
-      );
-    });
+      ) : (
+        <div className='d-flex justify-content-between'>
+          <span className='fs-5 ms-7'>{item.code} {item.description}</span>
+          {/* Show the icon only if input_type is not null */}
+          {showIcon && (
+            <div className='d-flex' >
+            <span style={{cursor:"pointer"}} onClick={() => handleIconClick(item.code, item.description)}>
+              <KTIcon iconName="messages" className='fs-2' />
+            </span>
+              {comments[item.code] && (
+                <p className="ms-3" title={comments[item.code]}>
+                  {comments[item.code].length > 20
+                    ? `${comments[item.code].slice(0, 20)}...`
+                    : comments[item.code]}
+                </p>
+              )}
+
+            </div>
+          )}
+        </div>
+      )}
+      {renderInput(item.input_type, item.description, item.classified, item.column, item.code)}
+    </div>
+  );
+});
   };
   
 
@@ -148,9 +198,31 @@ const Step1: FC = () => {
         </div>
       ))}
     </div>
-  </div>
+        {/* Modal for Comment Input */}
+        <Modal show={showCommentPopup} onHide={handleClosePopup}>
+        <Modal.Header closeButton>
+          <Modal.Title>{activeInput}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <textarea
+            className="form-control"
+            placeholder="Enter your comment"
+            value={currentComment}
+            onChange={(e) => setCurrentComment(e.target.value)}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClosePopup}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSaveComment}>
+            Save Comment
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
   );
 };
 
 
-export {Step1}
+export {Step1Comment}
