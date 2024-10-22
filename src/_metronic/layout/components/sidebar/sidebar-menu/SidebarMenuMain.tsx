@@ -8,13 +8,13 @@ const SidebarMenuMain = () => {
 
   return (
     <>
-      <SidebarMenuItem
+      {/* <SidebarMenuItem
         to='/dashboard'
         icon='element-11'
         title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
         fontIcon='bi-app-indicator'
-      />
-      <SidebarMenuItem
+      /> */}
+      {/* <SidebarMenuItem
         to='/WSDashboard'
         icon='element-10'
         title="DashboardWS"
@@ -25,14 +25,16 @@ const SidebarMenuMain = () => {
         icon='element-10'
         title="DashboardWR"
         fontIcon='bi-app-indicator'
-      />
+      /> */}
       <SidebarMenuItem to='/builder' icon='switch' title='Layout Builder' fontIcon='bi-layers' />
-      <div className='menu-item'>
-        <div className='menu-content pt-8 pb-2'>
-          <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Crafted</span>
-        </div>
-      </div>
-      <SidebarMenuItemWithSub
+   
+      <SidebarMenuItem
+        to='/crafted/pages/wizards/vertical'
+        icon='element-10'
+        title="ບົດວິພາກດານສິ່ງແວດລ້ອມ (ສວລ.5.1)"
+        fontIcon='bi-app-indicator'
+      />
+      {/* <SidebarMenuItemWithSub
         to='/crafted/pages'
         title='Pages'
         fontIcon='bi-archive'
@@ -66,8 +68,8 @@ const SidebarMenuMain = () => {
           />
           <SidebarMenuItem to='/crafted/pages/wizards/vertical' title='Vertical' hasBullet={true} />
         </SidebarMenuItemWithSub>
-      </SidebarMenuItemWithSub>
-      <SidebarMenuItemWithSub
+      </SidebarMenuItemWithSub> */}
+      {/* <SidebarMenuItemWithSub
         to='/crafted/accounts'
         title='Accounts'
         icon='profile-circle'
@@ -125,7 +127,7 @@ const SidebarMenuMain = () => {
           </span>
           <span className='menu-title'>Changelog {import.meta.env.VITE_APP_VERSION}</span>
         </a>
-      </div>
+      </div> */}
     </>
   )
 }

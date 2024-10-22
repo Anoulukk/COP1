@@ -172,7 +172,11 @@ const Step3: FC = () => {
         );
         default:
           if (isTInput) {
-            return <DynamicTable data={column}/>;
+            return classified === "title" ? (
+              <div className='ms-7'><DynamicTable data={column}/></div>
+            ) : (
+              <div className='ms-7'><DynamicTable data={column}/></div>
+            );
           }
           return null;
     }

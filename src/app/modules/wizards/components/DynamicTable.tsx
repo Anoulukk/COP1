@@ -39,7 +39,6 @@ const DynamicTable: FC<{data:any}> = ({ data }) => {
     );
     setRows(updatedRows);
   };
-console.log(data);
   return (
     <div>
       <table className="table table-row-bordered table-row-gray-500">
@@ -48,7 +47,6 @@ console.log(data);
             {data.map((colHeader:any, index:any) => (
               <th key={index}>{colHeader}</th>
             ))}
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -67,21 +65,19 @@ console.log(data);
               <td>
                 <div className="d-flex">
                   {rows.length > 1 && (
-                    <a
-                      href="#"
+                    <span
                       className="btn btn-sm btn-icon btn-bg-light btn-active-danger"
                       onClick={() => handleRemoveRow(row.id)}
                     >
                       <KTIcon iconName="minus" className="fs-5" />
-                    </a>
+                    </span>
                   )}
-                  <a
-                    href="#"
+                  <span
                     className="btn btn-sm btn-icon btn-bg-light btn-active-primary ms-3"
                     onClick={handleAddRow}
                   >
                     <KTIcon iconName="plus" className="fs-5" />
-                  </a>
+                  </span>
                 </div>
               </td>
             </tr>

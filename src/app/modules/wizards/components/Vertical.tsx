@@ -66,9 +66,9 @@ const Vertical = () => {
           id='kt_create_account_stepper'
         >
           {/* begin::Aside*/}
-          <div className='card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px me-9'>
+          <div className='card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-350px me-9'>
             {/* begin::Wrapper*/}
-            <div className='card-body px-6 px-lg-10 px-xxl-15 py-20'>
+            <div className='card-body py-10'>
               {/* begin::Nav*/}
               <div className='stepper-nav'>
                 {/* begin::Step 1*/}
@@ -295,6 +295,18 @@ const Vertical = () => {
 
                   <div data-kt-stepper-element='content'>
                     <Step5 />
+                  </div>
+
+                  <div data-kt-stepper-element='content'>
+                    <Step4 />
+                  </div>
+
+                  <div data-kt-stepper-element='content'>
+                    <Step3 />
+                  </div>
+
+                  <div data-kt-stepper-element='content'>
+                    <Step2 />
                   </div>
 
                   <div className='d-flex flex-stack pt-10'>

@@ -81,17 +81,21 @@ const Step2: FC = () => {
         return classified === "title" ? (
           <input type={inputType} placeholder={description} className="form-control ms-3" />
         ) : (
-          <input type={inputType} placeholder={description} className="form-control ms-4" />
+          <input type={inputType} placeholder={description} className="form-control ms-7" />
         );
       case 'choice':
         return classified === "title" ? (
           <Select className='react-select-styled ms-3' classNamePrefix='react-select' />
         ) : (
-          <Select className='react-select-styled ms-4' classNamePrefix='react-select' />
+          <Select className='react-select-styled ms-7' classNamePrefix='react-select' />
         );
         default:
           if (isTInput) {
-            return <DynamicTable data={column}/>;
+            return classified === "title" ? (
+              <div className='ms-7'><DynamicTable data={column}/></div>
+            ) : (
+              <div className='ms-7'><DynamicTable data={column}/></div>
+            );
           }
           return null;
     }
@@ -106,7 +110,7 @@ const Step2: FC = () => {
         <div className="form-group mb-3" key={index}>
           {item.classified === "title"
             ? <h4 className='ms-3'>{item.code} {item.description}</h4>
-            : <span className='fs-5 ms-4'>{item.code} {item.description}</span>}
+            : <span className='fs-5 ms-7'>{item.code} {item.description}</span>}
           {renderInput(item.input_type, item.description, item.classified, item.column)}
         </div>
       );
