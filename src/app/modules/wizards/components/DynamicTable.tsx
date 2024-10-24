@@ -40,8 +40,8 @@ const DynamicTable: FC<{data:any}> = ({ data }) => {
     setRows(updatedRows);
   };
   return (
-    <div>
-      <table className="table table-row-bordered table-row-gray-500">
+    <div style={{ overflowX: "auto", whiteSpace: "nowrap", width:"50vw" }}> {/* Enable horizontal scrolling */}
+      <table className="table table-row-bordered table-row-gray-500" style={{ minWidth: "1500px" }}> {/* Add a min-width */}
         <thead>
           <tr>
             {data.map((colHeader:any, index:any) => (
@@ -64,6 +64,12 @@ const DynamicTable: FC<{data:any}> = ({ data }) => {
               ))}
               <td>
                 <div className="d-flex">
+                <span
+                    className="btn btn-sm btn-icon btn-bg-light btn-active-primary me-3"
+                    onClick={handleAddRow}
+                  >
+                    <KTIcon iconName="plus" className="fs-5" />
+                  </span>
                   {rows.length > 1 && (
                     <span
                       className="btn btn-sm btn-icon btn-bg-light btn-active-danger"
@@ -72,12 +78,7 @@ const DynamicTable: FC<{data:any}> = ({ data }) => {
                       <KTIcon iconName="minus" className="fs-5" />
                     </span>
                   )}
-                  <span
-                    className="btn btn-sm btn-icon btn-bg-light btn-active-primary ms-3"
-                    onClick={handleAddRow}
-                  >
-                    <KTIcon iconName="plus" className="fs-5" />
-                  </span>
+  
                 </div>
               </td>
             </tr>

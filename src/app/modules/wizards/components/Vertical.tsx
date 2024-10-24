@@ -11,12 +11,14 @@ import {createAccountSchemas, ICreateAccount, inits} from './CreateAccountWizard
 import { ToolbarWrapper } from '../../../../_metronic/layout/components/toolbar'
 import { Content } from '../../../../_metronic/layout/components/content'
 import { Step1Comment } from './steps/Step1Comment'
+import { Step1ReConfirm } from './steps/Step1ReConfirm'
 
 const Vertical = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const [ stepper, setStepper ] = useState<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [initValues] = useState<ICreateAccount>(inits)
+  const [isMinimized, setIsMinimized] = useState(false)
 
   const loadStepper = () => {
     setStepper(StepperComponent.createInsance(stepperRef.current as HTMLDivElement))
@@ -57,6 +59,11 @@ const Vertical = () => {
     loadStepper()
   }, [stepperRef])
 
+  // Toggle function to minimize/maximize the card
+  const toggleCardSize = () => {
+    setIsMinimized(!isMinimized)
+  }
+
   return (
     <>
       <ToolbarWrapper />
@@ -67,7 +74,27 @@ const Vertical = () => {
           id='kt_create_account_stepper'
         >
           {/* begin::Aside*/}
-          <div className='card d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-350px me-9'>
+          <div
+            className={`card d-flex justify-content-center justify-content-xl-start flex-row-auto ${
+              isMinimized ? 'w-xxl-100px' : 'w-xl-300px w-xxl-350px'
+            } me-9`}
+            style={{ transition: 'width 0.3s ease-in-out' }}  // Smooth width transition
+          >
+
+            {/* Toggle button for minimizing/maximizing the card */}
+              <button
+                type='button'
+                className='btn btn-light app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute mt-15 start-100 translate-middle rotate'
+                onClick={toggleCardSize}
+              >
+                {isMinimized ? (
+                            <KTIcon iconName='black-right-line' className='fs-3 rotate-180 ms-1' />
+
+                ) : (
+                  <KTIcon iconName='black-left-line' className='fs-3 rotate-180 ms-1' />
+
+                )}
+              </button>
             {/* begin::Wrapper*/}
             <div className='card-body py-10'>
               {/* begin::Nav*/}
@@ -85,7 +112,8 @@ const Vertical = () => {
 
                     {/* begin::Label*/}
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>ຂໍ້ມູນທົ່ວໄປຂອງວິສາຫະກິດ</h3>
+                      {!isMinimized && <h3 className='stepper-title'>ຂໍ້ມູນທົ່ວໄປຂອງວິສາຫະກິດ</h3>}
+                      
 
                     </div>
                     {/* end::Label*/}
@@ -111,7 +139,7 @@ const Vertical = () => {
 
                     {/* begin::Label*/}
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>ທີ່ຕັ້ງ ແລະ ການນຳໃຊ້ພື້ນທີ່ໂຮງງານ</h3>
+                    {!isMinimized &&<h3 className='stepper-title'>ທີ່ຕັ້ງ ແລະ ການນຳໃຊ້ພື້ນທີ່ໂຮງງານ</h3>}
                     </div>
                     {/* end::Label*/}
                   </div>
@@ -136,7 +164,7 @@ const Vertical = () => {
 
                     {/* begin::Label*/}
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>ຂໍ້ມູນການປະກອບກິດຈະການ</h3>
+                    {!isMinimized &&<h3 className='stepper-title'>ຂໍ້ມູນການປະກອບກິດຈະການ</h3>}
                     </div>
                     {/* end::Label*/}
                   </div>
@@ -161,7 +189,7 @@ const Vertical = () => {
 
                     {/* begin::Label*/}
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>ການຄຸ້ມຄອງສິ່ງເສດເຫຼືອ</h3>
+                    {!isMinimized &&<h3 className='stepper-title'>ການຄຸ້ມຄອງສິ່ງເສດເຫຼືອ</h3>}
                     </div>
                     {/* end::Label*/}
                   </div>
@@ -186,7 +214,7 @@ const Vertical = () => {
 
                     {/* begin::Label*/}
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>ການຄວບຄຸມມົນລະພິດທາງນ້ຳ</h3>
+                    {!isMinimized && <h3 className='stepper-title'>ການຄວບຄຸມມົນລະພິດທາງນ້ຳ</h3>}
                     </div>
                     {/* end::Label*/}
                   </div>
@@ -210,7 +238,7 @@ const Vertical = () => {
 
                     {/* begin::Label*/}
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>ການຄວບຄຸມມົນລະພິດທາງອາກາດ</h3>
+                    {!isMinimized &&<h3 className='stepper-title'>ການຄວບຄຸມມົນລະພິດທາງອາກາດ</h3>}
                     </div>
                     {/* end::Label*/}
                   </div>
@@ -235,7 +263,7 @@ const Vertical = () => {
 
                     {/* begin::Label*/}
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>ການຄຸ້ມຄອງຄວາມປອດໄພ ແລະ ສຸຂະພາບແຮງງານ</h3>
+                    {!isMinimized && <h3 className='stepper-title'>ການຄຸ້ມຄອງຄວາມປອດໄພ ແລະ ສຸຂະພາບແຮງງານ</h3>}
                     </div>
                     {/* end::Label*/}
                   </div>
@@ -259,8 +287,8 @@ const Vertical = () => {
 
                     {/* begin::Label*/}
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>ສະຫຼຸບແຜນການຄຸ້ມຄອງ ແລະ 
-                      ຕິດຕາມກວດກາມົນລະພິດສິ່ງແວດລ້ອມ</h3>
+                    {!isMinimized && <h3 className='stepper-title'>ສະຫຼຸບແຜນການຄຸ້ມຄອງ ແລະ 
+                      ຕິດຕາມກວດກາມົນລະພິດສິ່ງແວດລ້ອມ</h3>}
                     </div>
                     {/* end::Label*/}
                   </div>
@@ -279,8 +307,9 @@ const Vertical = () => {
               {() => (
                 <Form className='' noValidate id='kt_create_account_form' placeholder={undefined}>
                   <div className='current' data-kt-stepper-element='content'  >
-                    {/* <Step1 /> */}
-                    <Step1Comment />
+                    <Step1 />
+                    {/* <Step1Comment /> */}
+                    {/* <Step1ReConfirm /> */}
                   </div>
 
                   <div data-kt-stepper-element='content'>

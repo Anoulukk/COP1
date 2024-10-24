@@ -50,7 +50,7 @@ const SidebarLogo = (props: PropsType) => {
   return (
     <div className='app-sidebar-logo px-6' id='kt_app_sidebar_logo'>
       <Link to='/dashboard'>
-        {config.layoutType === 'dark-sidebar' ? (
+        {/* {config.layoutType === 'dark-sidebar' ? (
           <img
             alt='Logo'
             src={toAbsoluteUrl('media/logos/default-dark.svg')}
@@ -69,13 +69,13 @@ const SidebarLogo = (props: PropsType) => {
               className='h-25px app-sidebar-logo-default theme-dark-show'
             />
           </>
-        )}
+        )} */}
 
-        <img
+        {/* <img
           alt='Logo'
           src={toAbsoluteUrl('media/logos/default-small.svg')}
           className='h-20px app-sidebar-logo-minimize'
-        />
+        /> */}
       </Link>
 
       {(appSidebarDefaultMinimizeDesktopEnabled || appSidebarDefaultCollapseDesktopEnabled) && (

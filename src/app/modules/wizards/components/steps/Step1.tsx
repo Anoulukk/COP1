@@ -6,6 +6,45 @@ import Select from 'react-select';
 
 
 const Step1: FC = () => {
+  const provinceOptions = [
+    { value: "ນະຄອນຫລວງວຽງຈັນ", label: "ນະຄອນຫລວງວຽງຈັນ" },
+    { value: "ຫຼວງພຣະບາງ", label: "ຫຼວງພຣະບາງ" },
+    { value: "ຊຽງຂວາງ", label: "ຊຽງຂວາງ" },
+    { value: "ຈຳປາສັກ", label: "ຈຳປາສັກ" },
+    { value: "ສະຫວັນນະເຂດ", label: "ສະຫວັນນະເຂດ" },
+    { value: "ໄຊຍະບູລີ", label: "ໄຊຍະບູລີ" },
+    { value: "ບໍແກ້ວ", label: "ບໍແກ້ວ" },
+    { value: "ຫົວພັນ", label: "ຫົວພັນ" },
+    { value: "ເຊກອງ", label: "ເຊກອງ" },
+    { value: "ອຸດົມໄຊ", label: "ອຸດົມໄຊ" },
+    { value: "ຫລວງນ້ຳທາ", label: "ຫລວງນ້ຳທາ" },
+    { value: "ສາລະວັນ", label: "ສາລະວັນ" },
+    { value: "ຄຳມ່ວນ", label: "ຄຳມ່ວນ" },
+    { value: "ບໍລິຄໍາໄຊ", label: "ບໍລິຄໍາໄຊ" },
+    { value: "ອັດຕະປື", label: "ອັດຕະປື" },
+    { value: "ຜົ້ງສາລີ", label: "ຜົ້ງສາລີ" },
+    { value: "ໄຊສົມບູນ", label: "ໄຊສົມບູນ" },
+  ];
+  
+  const districtOptions = [
+    { value: "ໄຊເຊດຖາ", label: "ໄຊເຊດຖາ" },
+    { value: "ສີໂຄດຕະບອງ", label: "ສີໂຄດຕະບອງ" },
+    { value: "ສີສັດຕະນາກ", label: "ສີສັດຕະນາກ" },
+    { value: "ຈັນທະບູລີ", label: "ຈັນທະບູລີ" },
+    { value: "ຫາດຊາຍຟອງ", label: "ຫາດຊາຍຟອງ" },
+  ];
+  
+  const villageOptions = [
+    { value: "ບ້ານໂພນປ່າເປົາ", label: "ບ້ານໂພນປ່າເປົາ" },
+    { value: "ບ້ານໜອງເຫນືອງ", label: "ບ້ານໜອງເຫນືອງ" },
+    { value: "ບ້ານດົງກ້ອຍ", label: "ບ້ານດົງກ້ອຍ" },
+    { value: "ບ້ານສົກຄຳ", label: "ບ້ານສົກຄຳ" },
+    { value: "ບ້ານໜອງເບີກ", label: "ບ້ານໜອງເບີກ" },
+    { value: "ບ້ານນາຄຳ", label: "ບ້ານນາຄຳ" },
+    { value: "ບ້ານຊົມມານີ", label: "ບ້ານຊົມມານີ" },
+    { value: "ບ້ານສົມສັງຫາ", label: "ບ້ານສົມສັງຫາ" }
+  ];
+  
   const forms:any = {
     form110: [
       { classified: "heading", code: "110", description: "ຂໍ້ມູນວິສາຫະກິດ", input_type: null },
@@ -19,9 +58,9 @@ const Step1: FC = () => {
       { classified: "sub_head", code: "110D2", description: "ໂດລາ", input_type: "number" },
       { classified: "title", code: "110E", description: "ກຳນົດອາຍຸການລົງທຶນ (ປີ)", input_type: "number" },
       { classified: "title", code: "110F", description: "ທີ່ຕັ້ງສຳນັກງານ", input_type: null },
-      { classified: "sub_head", code: "110F1", description: "ບ້ານ", input_type: "choice" },
-      { classified: "sub_head", code: "110F2", description: "ເມືອງ", input_type: "choice" },
-      { classified: "sub_head", code: "110F3", description: "ແຂວງ", input_type: "choice" },
+      { classified: "sub_head", code: "110F1", description: "ບ້ານ", input_type: "choice", options: villageOptions},
+      { classified: "sub_head", code: "110F2", description: "ເມືອງ", input_type: "choice", options: districtOptions},
+      { classified: "sub_head", code: "110F3", description: "ແຂວງ", input_type: "choice", options: provinceOptions},
       { classified: "sub_head", code: "110F4", description: "ເຂດເສດຖະກິດພິເສດ", input_type: "choice" },
       { classified: "title", code: "110G", description: "ໂຄງຮ່າງການຈັດຕັ້ງ", input_type: "file" },
       { classified: "title", code: "110H", description: "ເລກປະຈຳຕົວວິສາຫະກິດ", input_type: "number" },
@@ -69,7 +108,7 @@ const Step1: FC = () => {
     ],
 
   };
-  const renderInput = (inputType: string, description: string, classified: string, column:any) => {
+  const renderInput = (inputType: string, description: string, classified: string, column:any , options:[string]) => {
     const isTInput = inputType?.startsWith('T');
     switch (inputType) {
       case 'text':
@@ -82,9 +121,9 @@ const Step1: FC = () => {
         );
       case 'choice':
         return classified === "title" ? (
-          <Select className='react-select-styled ms-3' classNamePrefix='react-select' />
+          <Select className='react-select-styled ms-3' classNamePrefix='react-select' options={options}/>
         ) : (
-          <Select className='react-select-styled ms-7' classNamePrefix='react-select' />
+          <Select className='react-select-styled ms-7' classNamePrefix='react-select' options={options}/>
         );
         default:
           if (isTInput) {
@@ -108,7 +147,7 @@ const Step1: FC = () => {
           {item.classified === "title"
             ? <h4 className='ms-3'>{item.code} {item.description}</h4>
             : <span className='fs-5 ms-7'>{item.code} {item.description}</span>}
-          {renderInput(item.input_type, item.description, item.classified, item.column)}
+          {renderInput(item.input_type, item.description, item.classified, item.column, item.options)}
         </div>
       );
     });

@@ -23,7 +23,7 @@ const Step3: FC = () => {
       { classified: "sub_head", code: "313A", description: "ສານເຄມີທັງໝົດທີ່ນຳໃຊ້ (ຊະນິດ)", input_type: "number" },
       { classified: "sub_head", code: "313B", description: "ປະລິມານສານເຄມີທັງໝົດທີ່ນຳໃຊ້ (kg)", input_type: "number" },
 
-      { classified: "sub_head", code: "313C", description: "ສານເຄມີທັງໝົດທີ່ນຳໃຊ້ (ຊະນິດ)", input_type: "number" },
+      { classified: "sub_head", code: "313C", description: "ປະເພດສານເຄມີເປັນພິດອັນຕະລາຍ", input_type: null },
       { classified: "sub_head", code: "313C1", description: "ສານເຄມີປະເພດ 1 (ຊະນິດ)", input_type: "number" },
       { classified: "sub_head", code: "313C2", description: "ສານເຄມີປະເພດ 2 (ຊະນິດ)", input_type: "number" },
       { classified: "sub_head", code: "313C3", description: "ສານເຄມີປະເພດ 3 (ຊະນິດ)", input_type: "number" },
@@ -47,7 +47,7 @@ const Step3: FC = () => {
 
       { classified: "title", code: "322", description: "ຜະລິດຕະພັນຂ້າງຄຽງ", input_type: null },
       { classified: "sub_head", code: "322A", description: "ຜະລິດຕະພັນຂ້າງຄຽງ (ຊະນິດ)", input_type: "text" },
-      { classified: "sub_head", code: "322B", description: "ຂໍ້ມູນຜະລິດຕະພັນຂ້າງຄຽງ", input_type: "T3-6", column:["ລຳດັບ", "ຊື່ຜະລິດຕະພັນຂ້າງຄຽງ", "ປະລິມານ", "ກຳລັງການຜະລິດສູງສຸດ", "ການບັນຈຸ","ສະຖານທີ່ເກັບ"] },
+      { classified: "sub_head", code: "322B", description: "ຂໍ້ມູນຜະລິດຕະພັນຂ້າງຄຽງ", input_type: "T3-6", column:["ລຳດັບ", "ຊື່ຜະລິດຕະພັນຂ້າງຄຽງ", "ປະລິມານ", "ມາຈາກຂະບວນການ", "ການບັນຈຸ","ສະຖານທີ່ເກັບ"] },
       { classified: "sub_head", code: "322C", description: "ຮູບພາບຜະລິດຕະພັນຂ້າງຄຽງ", input_type: "file" },
     ],
     form330: [
@@ -97,7 +97,7 @@ const Step3: FC = () => {
       { classified: "sub_head", code: "333D1", description: "ຂະໜາດການນຳໃຊ້ນ້ຳໃຕ້ດິນ", input_type: "choice" },
       { classified: "sub_head", code: "333D2", description: "ປະລິມານການໃຊ້ (ແມັດກ້ອນ)", input_type: "number" },
       { classified: "sub_head", code: "333D3", description: "ຈຳນວນບໍ່ນ້ຳບາດານ/ບໍ່ນ້ຳສ້າງ (ຈຸດ)", input_type: "number" },
-      { classified: "sub_head", code: "333D4", description: "ຂໍ້ມູນບໍ່ນ້ຳບາດານ/ບໍ່ນ້ຳສ້າງ", input_type: "T3-9", column:["ບໍນ້ຳບາດານ/ນ້ຳສ້າງ ເລກທີ", "ພິກັດ", "ຄວາມເລີກ", "ຂະໜາດປ້ຳ"] },
+      { classified: "sub_head", code: "333D4", description: "ຂໍ້ມູນບໍ່ນ້ຳບາດານ/ບໍ່ນ້ຳສ້າງ", input_type: "T3-9", column:["ບໍນ້ຳບາດານ/ນ້ຳສ້າງ ເລກທີ", "ພິກັດ", "ຄວາມເລິກ", "ຂະໜາດປ້ຳ"] },
       { classified: "sub_head", code: "333D5", description: "ແຜນຜັງບໍ່ນ້ຳບາດານ/ບໍ່ນ້ຳສ້າງ", input_type: "file" },
       { classified: "sub_head", code: "333D6", description: "ໝໍ້ວັດປະລິມານການນຳໃຊ້ນ້ຳໃຕ້ດິນ", input_type: "choice" },
       
@@ -144,12 +144,12 @@ const Step3: FC = () => {
       { classified: "sub_head", code: "350A", description: "ໃບຢັ້ງຢືນກ່ຽວກັບແຫຼ່ງທີ່ມາວັດຖຸດິບ", input_type: "file" },
       { classified: "sub_head", code: "350B", description: "ໃບອະນຸຍາດນຳເຂົ້າ", input_type: "file" },
       { classified: "sub_head", code: "350C", description: "ໃບທະບຽນບັນຊີເຄມີ", input_type: "file" },
-      { classified: "sub_head", code: "350C", description: "ເອກະສານຂໍ້ມູນຄວາມປອດໄພເຄມີ (safety data sheet)", input_type: "file" },
-      { classified: "sub_head", code: "350C", description: "ໃບຢັ້ງຢືນຜົນການວິເຄາະເຄມີ (ກໍລະນີເປັນທາດປະສົມ)", input_type: "file" },
-      { classified: "sub_head", code: "350C", description: "ສະຫຼາກເຄມີ", input_type: "file" },
-      { classified: "sub_head", code: "350C", description: "ໃບອະນຸຍາດນຳໃຊ້ນ້ຳໜ້າດິນ", input_type: "file" },
-      { classified: "sub_head", code: "350C", description: "ໃບອະນຸຍາດນຳໃຊ້ນ້ຳໃຕ້ດິນ", input_type: "file" },
-      { classified: "sub_head", code: "350C", description: "ໃບອະນຸຍາດຂຸດເຈາະ ຫຼື ຊີເຈາະນ້ຳໃຕ້ດິນ", input_type: "file" },
+      { classified: "sub_head", code: "350D", description: "ເອກະສານຂໍ້ມູນຄວາມປອດໄພເຄມີ (safety data sheet)", input_type: "file" },
+      { classified: "sub_head", code: "350E", description: "ໃບຢັ້ງຢືນຜົນການວິເຄາະເຄມີ (ກໍລະນີເປັນທາດປະສົມ)", input_type: "file" },
+      { classified: "sub_head", code: "350F", description: "ສະຫຼາກເຄມີ", input_type: "file" },
+      { classified: "sub_head", code: "350G", description: "ໃບອະນຸຍາດນຳໃຊ້ນ້ຳໜ້າດິນ", input_type: "file" },
+      { classified: "sub_head", code: "350H", description: "ໃບອະນຸຍາດນຳໃຊ້ນ້ຳໃຕ້ດິນ", input_type: "file" },
+      { classified: "sub_head", code: "350I", description: "ໃບອະນຸຍາດຂຸດເຈາະ ຫຼື ຊີເຈາະນ້ຳໃຕ້ດິນ", input_type: "file" },
     ]
   };
 

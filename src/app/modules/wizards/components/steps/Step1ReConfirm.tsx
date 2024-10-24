@@ -4,9 +4,9 @@ import {ErrorMessage, Field} from 'formik'
 import DynamicTable from '../DynamicTable';
 import Select from 'react-select';
 import { Button, Modal } from 'react-bootstrap';
-
-
-const Step1Comment: FC = () => {
+import Swal from 'sweetalert2';
+import {OverlayTrigger, Tooltip} from "react-bootstrap";
+const Step1ReConfirm: FC = () => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [currentComment, setCurrentComment] = useState('');
   const [activeInput, setActiveInput] = useState<string>(""); // Keep track of the active input for comments
@@ -93,75 +93,163 @@ const Step1Comment: FC = () => {
     ],
 
   };
-   const renderInput = (inputType: string, description: string, classified: string, column: any, code: string) => {
-    const isTInput = inputType?.startsWith('T')
+
+  const allComment: { [key: string]: string } = {
+    '110A1': 'ກອກຕາມທີ່ລະບຸໄວ້ໃນໃບທະບຽນວິສາຫະກິດ',
+    '110A2': 'ກອກຕາມທີ່ລະບຸໄວ້ໃນໃບທະບຽນວິສາຫະກິດ',
+    '110B': 'ກອກຕາມທີ່ລະບຸໄວ້ໃນໃບທະບຽນວິສາຫະກິດ',
+    '110C': 'Specify the type of business here.',
+    '110G': 'Upload the organizational structure here.',
+    '110H': 'Provide the business registration number.',
+
+  };
+
+  const renderInput = (inputType: string, description: string, classified: string, column: any, code: string, isRedBorder: boolean) => {
+    const isTInput = inputType?.startsWith('T');
+    
+    const inputClass = isRedBorder ? "form-control border border-danger" : "form-control border border-default";
+    // let inputValue = $(this).val().replace(/[^0-9]/g, '');
+    // if (inputValue.startsWith('0') && inputValue.length > 1) {
+    //   inputValue = inputValue.replace(/^0+/, ''); 
+    // }
     switch (inputType) {
       case 'text':
       case 'number':
       case 'file':
         return (
-          <div className={classified === 'title' ? ' ms-3' : ' ms-7'}>
-            <input type={inputType} placeholder={description} className="form-control" disabled/>
-            {/* Display the comment below the input if it exists */}
+          <div className={classified === 'title' ? 'ms-3' : 'ms-7'}>
+            <input type={inputType} placeholder={description} className={inputClass} min={1}/>
             
+            {/* Display the comment below the input if it exists */}
           </div>
-        )
+        );
       case 'choice':
         return (
-          <Select className={classified === 'title' ? 'react-select-styled ms-3' : 'react-select-styled ms-7'} classNamePrefix="react-select" isDisabled/>
-        )
+          <Select className={classified === 'title' ? 'react-select-styled ms-3' : 'react-select-styled ms-7'} classNamePrefix="react-select" />
+        );
       default:
         if (isTInput) {
-          return <div className="ms-7"><DynamicTable data={column} /></div>
+          return <div className="ms-7"><DynamicTable data={column} /></div>;
         }
-        return null
+        return null;
     }
-  }
-  const renderFormItems = (form: any[]) => {
+  };
+  
+  const renderFormItems = (form: any[], comments: any) => {
+    const [inputBorders, setInputBorders] = useState<{ [key: string]: boolean }>({});
+  
+    const handleIconClick = (code: string, description: string) => {
+      // Show the SweetAlert popup
+      Swal.fire({
+        title: 'Confirm',
+        text: `Do you want to confirm the input for ${description}?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // If confirmed, remove the red border for the input with this code
+          setInputBorders((prevState) => ({
+            ...prevState,
+            [code]: false,
+          }));
+        }
+      });
+    };
+  
     return form.map((item, index) => {
       if (item.classified === 'heading') {
         return null;
       }
-      // Check if item.input_type is not null
-  const showIcon = item.input_type !== null;
-
-  return (
-    <div className="form-group mb-3" key={index}>
-      {item.classified === 'title' ? (
-        <div className='d-flex justify-content-between'>
-          <h4 className='ms-3'>{item.code} {item.description}</h4>
-          {/* Show the icon only if input_type is not null */}
-          {showIcon && (
-            <span onClick={() => handleIconClick(item.code, item.description)}>
-              <KTIcon iconName="messages" className='fs-2' />
-            </span>
-          )}
-        </div>
-      ) : (
-        <div className='d-flex justify-content-between'>
-          <span className='fs-5 ms-7'>{item.code} {item.description}</span>
-          {/* Show the icon only if input_type is not null */}
-          {showIcon && (
-            <div className='d-flex' >
-            <span style={{cursor:"pointer"}} onClick={() => handleIconClick(item.code, item.description)}>
-              <KTIcon iconName="messages" className='fs-2' />
-            </span>
-              {comments[item.code] && (
-                <p className="ms-3" title={comments[item.code]}>
-                  {comments[item.code].length > 20
-                    ? `${comments[item.code].slice(0, 20)}...`
-                    : comments[item.code]}
-                </p>
+  
+      const showIcon = item.input_type !== null;
+      const isRedBorder = inputBorders[item.code] !== false; // Check if the input should have a red border
+      const inputClass = isRedBorder ? "text-danger" : "text-default";
+  
+      return (
+        <div className="form-group mb-3" key={index}>
+          {item.classified === 'title' ? (
+            <div className="d-flex justify-content-between">
+              <h4 className={`ms-3 ${showIcon ? inputClass: ""}`}>
+                {item.code} {item.description}  
+                {showIcon && (        
+                  <OverlayTrigger
+                  placement="right"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={(props) => (
+                  <Tooltip id="button-tooltip" {...props}>
+                  {allComment[item.code]}
+                  </Tooltip>
+                  )}
+                  >
+                  <span
+                  className="bg-transparent border-0"
+                  >
+                  <i className={`bi bi-exclamation-circle fs-3 ${inputClass} ms-3`}></i>
+                  </span>
+                  </OverlayTrigger>   
+              //    <i
+              //   className="fas fa-exclamation-circle ms-2 fs-5"
+              //   data-bs-toggle="tooltip"
+              //   title={allComment[item.code]}
+              // ></i>
+            )}
+              </h4>
+              {showIcon && (
+                <span
+                  className="parent-hover"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => handleIconClick(item.code, item.description)}
+                >
+                  <KTIcon iconName="check" className="fs-2 parent-hover-primary" />
+                </span>
               )}
-
+            </div>
+          ) : (
+            <div className="d-flex justify-content-between">
+              <span className={`fs-5 ms-7 ${inputClass}`}>
+                {item.code} {item.description}       
+                  <OverlayTrigger
+                  placement="right"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={(props) => (
+                  <Tooltip id="button-tooltip" {...props}>
+                  {allComment[item.code]}
+                  </Tooltip>
+                  )}
+                  >
+                  <span
+                  className="bg-transparent border-0"
+                  >
+                  <i className={`bi bi-exclamation-circle fs-3 ${inputClass} ms-3`}></i>
+                  </span>
+                  </OverlayTrigger>   
+              </span>
+              {showIcon && (
+                <div className="d-flex">
+                  <span
+                    className="parent-hover"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => handleIconClick(item.code, item.description)}
+                  >
+                    <KTIcon iconName="check" className="fs-3 parent-hover-primary" />
+                  </span>
+                  {comments[item.code] && (
+                    <p className="ms-3" title={comments[item.code]}>
+                      {comments[item.code].length > 20
+                        ? `${comments[item.code].slice(0, 20)}...`
+                        : comments[item.code]}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
           )}
+          {renderInput(item.input_type, item.description, item.classified, item.column, item.code, isRedBorder)}
         </div>
-      )}
-      {renderInput(item.input_type, item.description, item.classified, item.column, item.code)}
-    </div>
-  );
-});
+      );
+    });
   };
   
 
@@ -192,7 +280,7 @@ const Step1Comment: FC = () => {
             data-bs-parent='#kt_accordion_1'
           >
             <div className='accordion-body'>
-              {renderFormItems(forms[formKey])}
+            {renderFormItems(forms[formKey], comments)}
             </div>
           </div>
         </div>
@@ -225,4 +313,4 @@ const Step1Comment: FC = () => {
 };
 
 
-export {Step1Comment}
+export {Step1ReConfirm}
